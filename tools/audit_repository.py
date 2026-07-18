@@ -36,11 +36,23 @@ def fail(message: str) -> None:
 
 def main() -> None:
     result = subprocess.run(
-        ["git", "ls-files", "-z", "--cached", "--others", "--exclude-standard"],
+        [
+            "git",
+            "-c",
+            f"safe.directory={ROOT}",
+            "ls-files",
+            "-z",
+            "--cached",
+            "--others",
+            "--exclude-standard",
+        ],
         cwd=ROOT,
-        check=True,
+        check=False,
         capture_output=True,
     )
+    if result.returncode != 0:
+        detail = result.stderr.decode("utf-8", errors="replace").strip()
+        fail(f"git file inventory failed: {detail or 'unknown git error'}")
     tracked = [Path(raw.decode("utf-8")) for raw in result.stdout.split(b"\0") if raw]
     violations: list[str] = []
     for path in tracked:
