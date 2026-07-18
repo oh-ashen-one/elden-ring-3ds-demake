@@ -54,6 +54,18 @@ def ignored(_: str, names: list[str]) -> set[str]:
     return ignored_names
 
 
+def collect_artifacts(source_root: Path) -> None:
+    for suffix in OUTPUT_SUFFIXES:
+        artifact_name = f"{TARGET}{suffix}"
+        destination = ROOT / artifact_name
+        candidates = [source_root / artifact_name, source_root / "build" / artifact_name]
+        if suffix in {".map", ".lst"}:
+            candidates.extend(source_root.rglob(f"*{suffix}"))
+        source = next((candidate for candidate in candidates if candidate.is_file()), None)
+        if source is not None and source.resolve() != destination.resolve():
+            shutil.copy2(source, destination)
+
+
 def run_build() -> None:
     environment = os.environ.copy()
     if not environment.get("DEVKITPRO") or not environment.get("DEVKITARM"):
@@ -62,21 +74,14 @@ def run_build() -> None:
     if " " not in str(ROOT):
         subprocess.run(["make", "-f", "Makefile", "-j4"], cwd=ROOT,
                        env=environment, check=True)
-        return
-
-    with tempfile.TemporaryDirectory(prefix="ashen-rift-3ds-") as temporary:
-        staging = Path(temporary) / "source"
-        shutil.copytree(ROOT, staging, ignore=ignored)
-        subprocess.run(["make", "-f", "Makefile", "-j4"], cwd=staging,
-                       env=environment, check=True)
-        for suffix in OUTPUT_SUFFIXES:
-            artifact_name = f"{TARGET}{suffix}"
-            candidates = [staging / artifact_name, staging / "build" / artifact_name]
-            if suffix in {".map", ".lst"}:
-                candidates.extend(staging.rglob(f"*{suffix}"))
-            source = next((candidate for candidate in candidates if candidate.is_file()), None)
-            if source is not None:
-                shutil.copy2(source, ROOT / artifact_name)
+        collect_artifacts(ROOT)
+    else:
+        with tempfile.TemporaryDirectory(prefix="ashen-rift-3ds-") as temporary:
+            staging = Path(temporary) / "source"
+            shutil.copytree(ROOT, staging, ignore=ignored)
+            subprocess.run(["make", "-f", "Makefile", "-j4"], cwd=staging,
+                           env=environment, check=True)
+            collect_artifacts(staging)
 
     required = ROOT / f"{TARGET}.3dsx"
     if not required.is_file():
