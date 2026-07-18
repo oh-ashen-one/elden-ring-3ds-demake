@@ -74,7 +74,7 @@ export LIBPATHS := $(foreach dir,$(LIBDIRS),-L$(dir)/lib)
 export _3DSXDEPS := $(OUTPUT).smdh
 export _3DSXFLAGS += --smdh=$(OUTPUT).smdh --romfs=$(CURDIR)/$(ROMFS)
 
-.PHONY: all assets validate-assets audit-repo test-host verify-build package-sd check-netload run clean
+.PHONY: all assets validate-assets audit-repo test-host validate-hardware-report verify-build package-sd check-netload run clean
 
 all: assets $(BUILD)
 	@$(MAKE) --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
@@ -102,6 +102,13 @@ audit-repo:
 
 test-host: $(HOST_BUILD)/core_tests
 	@$(HOST_BUILD)/core_tests
+	@$(PYTHON) tests/hardware_report_tests.py
+
+HARDWARE_REPORT ?= docs/HARDWARE_REPORT.json
+HARDWARE_ARTIFACT ?= $(TARGET).3dsx
+
+validate-hardware-report:
+	@$(PYTHON) tools/validate_hardware_report.py "$(HARDWARE_REPORT)" --artifact "$(HARDWARE_ARTIFACT)"
 
 $(HOST_BUILD)/core_tests: $(HOST_SOURCES) include/demake/core.hpp \
                          include/demake/asset_registry.hpp include/demake/rigid_animation.hpp \
