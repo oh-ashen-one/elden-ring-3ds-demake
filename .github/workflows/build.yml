@@ -24,7 +24,7 @@ jobs:
         run: make verify-build
       - name: Record hashes and sizes
         run: |
-          arm-none-eabi-g++ --version > build-report.txt
+          "${DEVKITARM}/bin/arm-none-eabi-g++" --version > build-report.txt
           tex3ds --version >> build-report.txt
           sha256sum elden-ring-3ds-demake.3dsx >> build-report.txt
           stat --printf='%n %s bytes\n' elden-ring-3ds-demake.3dsx >> build-report.txt
