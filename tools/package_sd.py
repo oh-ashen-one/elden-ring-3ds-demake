@@ -27,8 +27,9 @@ def sha256_bytes(payload: bytes) -> str:
 
 
 def source_commit() -> str:
+    git = ["git", "-c", f"safe.directory={ROOT}"]
     result = subprocess.run(
-        ["git", "rev-parse", "HEAD"],
+        [*git, "rev-parse", "HEAD"],
         cwd=ROOT,
         check=False,
         capture_output=True,
@@ -37,7 +38,7 @@ def source_commit() -> str:
     if result.returncode != 0:
         fail("cannot resolve the source commit")
     status = subprocess.run(
-        ["git", "status", "--porcelain", "--untracked-files=no"],
+        [*git, "status", "--porcelain", "--untracked-files=no"],
         cwd=ROOT,
         check=False,
         capture_output=True,
