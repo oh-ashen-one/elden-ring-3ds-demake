@@ -24,9 +24,22 @@ def clean() -> None:
         artifact = ROOT / f"{TARGET}{suffix}"
         if artifact.is_file():
             artifact.unlink()
+    for report_name in ("build-validation.json", "build-report.txt"):
+        report = ROOT / report_name
+        if report.is_file():
+            report.unlink()
     generated_audio = ROOT / "romfs" / "audio" / "ambient.pcm"
     if generated_audio.is_file():
         generated_audio.unlink()
+    generated_texture = ROOT / "data" / "environment_atlas.t3x"
+    if generated_texture.is_file():
+        generated_texture.unlink()
+    generated_registry = ROOT / "include" / "demake" / "generated" / "asset_registry_data.hpp"
+    if generated_registry.is_file():
+        generated_registry.unlink()
+    generated_scene = ROOT / "include" / "demake" / "generated" / "scene_asset_data.hpp"
+    if generated_scene.is_file():
+        generated_scene.unlink()
     print("cleaned generated build outputs")
 
 
