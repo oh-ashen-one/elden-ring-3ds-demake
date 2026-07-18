@@ -60,7 +60,9 @@ CPPFILES     := asset_registry.cpp audio_streamer.cpp core.cpp game_app.cpp main
                 renderer.cpp rigid_animation.cpp scene_assets.cpp zone_resources.cpp
 SFILES       :=
 PICAFILES    := vshader.v.pica
-BINFILES     := $(foreach dir,$(DATA),$(notdir $(wildcard $(dir)/*.*)))
+# Keep native data inputs explicit. Cloud-sync conflict copies or unrelated
+# scratch files in data/ must never become linker inputs.
+BINFILES     := environment_atlas.t3x
 
 export LD := $(CXX)
 export OFILES_SOURCES := $(CPPFILES:.cpp=.o) $(CFILES:.c=.o) $(SFILES:.s=.o)
