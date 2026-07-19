@@ -18,13 +18,13 @@ and the uncut physical-console proof. A missing report intentionally fails.
 ## Console readiness
 
 - [x] Photo confirms the aqua original Nintendo 3DS family (CTR-001), Japanese region.
-- [ ] Confirm the rear-shell model marking and record the exact System Settings version.
-- [ ] Record system version, Luma3DS version, and Homebrew Launcher version.
-- [ ] Back up important SD-card contents before changing the card.
-- [ ] Confirm SD card is healthy and Homebrew Launcher can run a known homebrew app.
+- [x] Confirm the original CTR-001 model and record System Settings version `11.17.0-50J`.
+- [ ] Record Homebrew Launcher version; Luma3DS `v13.4` is installed.
+- [x] Back up important SD-card contents and the post-install SysNAND recovery image outside the repository.
+- [ ] Confirm Homebrew Launcher can run a known homebrew app; the SD card has passed FAT32 verification.
 - [ ] Record the test build commit and SHA-256.
 
-The console is currently stock/not homebrewed. Do not choose or run an entrypoint until the System Settings version is recorded and the current official [3DS Hacks Guide](https://3ds.hacks.guide/get-started.html) is followed for that exact model/version.
+Boot9strap, Luma3DS, and the standard finalization tools were installed using the current official [3DS Hacks Guide](https://3ds.hacks.guide/get-started.html) for this model and firmware. This setup milestone does not satisfy the game-specific physical acceptance gate below.
 
 ## Deployment evidence
 
