@@ -107,4 +107,4 @@ The local and CI hashes differ because they were linked against different offici
 
 ## Evidence boundary
 
-This proves that the source, tests, asset policy, shader, RomFS, native link pipeline, and title-screen emulator smoke work. It does **not** prove that input, audio, performance, netloading, sleep/wake, or the full gameplay loop work on a physical New Nintendo 3DS. Those claims remain pending in `HARDWARE_TEST.md`.
+This proves that the source, tests, asset policy, shader, RomFS, native link pipeline, and title-screen emulator smoke work. It does **not** prove that input, audio, performance, netloading, sleep/wake, or the full gameplay loop work on the user's physical original Nintendo 3DS. Those claims remain pending in `HARDWARE_TEST.md`.

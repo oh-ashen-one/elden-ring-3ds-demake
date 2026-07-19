@@ -1,4 +1,4 @@
-# Physical New Nintendo 3DS acceptance checklist
+# Physical original Nintendo 3DS (CTR-001) acceptance checklist
 
 Compilation and emulator behavior do not satisfy this checklist.
 
@@ -17,11 +17,14 @@ and the uncut physical-console proof. A missing report intentionally fails.
 
 ## Console readiness
 
-- [ ] Record exact model: New 3DS, New 3DS XL, or New 2DS XL.
+- [x] Photo confirms the aqua original Nintendo 3DS family (CTR-001), Japanese region.
+- [ ] Confirm the rear-shell model marking and record the exact System Settings version.
 - [ ] Record system version, Luma3DS version, and Homebrew Launcher version.
 - [ ] Back up important SD-card contents before changing the card.
 - [ ] Confirm SD card is healthy and Homebrew Launcher can run a known homebrew app.
 - [ ] Record the test build commit and SHA-256.
+
+The console is currently stock/not homebrewed. Do not choose or run an entrypoint until the System Settings version is recorded and the current official [3DS Hacks Guide](https://3ds.hacks.guide/get-started.html) is followed for that exact model/version.
 
 ## Deployment evidence
 

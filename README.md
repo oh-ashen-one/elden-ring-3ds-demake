@@ -1,8 +1,8 @@
 # Ashen Rift
 
-Ashen Rift is an original, low-poly action-RPG homebrew demo for the New Nintendo 3DS family. It is a from-scratch fan demake experiment inspired by the feeling of modern dark-fantasy games, not a port or redistribution of any commercial title.
+Ashen Rift is an original, low-poly action-RPG homebrew demo rebuilt for the original Nintendo 3DS (CTR-001). It is a from-scratch fan demake experiment inspired by the feeling of modern dark-fantasy games, not a port or redistribution of any commercial title.
 
-The playable sequence connects three memory-bounded zones: a sunken interior, an outdoor reveal with an NPC encounter, and a boss arena. It includes third-person movement, C-stick camera control, lock-on, stamina combat, healing, RomFS-backed text dialogue, a scripted boss, dual-screen UI, generated original audio, and performance diagnostics.
+The playable sequence connects three memory-bounded zones: a sunken interior, an outdoor reveal with an NPC encounter, and a boss arena. It includes third-person movement, D-pad camera control, lock-on, stamina combat, healing, RomFS-backed text dialogue, a scripted boss, dual-screen UI, generated original audio, and performance diagnostics.
 
 The complete project contract is preserved in [MASTER_GOAL_PROMPT.md](MASTER_GOAL_PROMPT.md); [GOAL_PROMPT.md](GOAL_PROMPT.md) is its reusable sub-4,000-character `/goal` launcher.
 
@@ -14,7 +14,7 @@ The complete project contract is preserved in [MASTER_GOAL_PROMPT.md](MASTER_GOA
 - Repository policy audit, asset validation, deterministic host smoke flows, native artifact verification, and private GitHub Actions are implemented; see [BUILD_EVIDENCE.md](docs/BUILD_EVIDENCE.md).
 - The requirement-by-requirement state is maintained in [COMPLETION_AUDIT.md](docs/COMPLETION_AUDIT.md), with the intended 6:40 acceptance route in [PLAYTHROUGH_ROUTE.md](docs/PLAYTHROUGH_ROUTE.md).
 - The physical gate has a deliberately failing-until-tested [hardware report template](docs/HARDWARE_REPORT_TEMPLATE.json) and validator; see [HARDWARE_TEST.md](docs/HARDWARE_TEST.md).
-- Physical New Nintendo 3DS-family verification remains required. A local build or emulator boot is deliberately not called completion.
+- Physical verification on the user's Japanese original Nintendo 3DS remains required. A local build or emulator boot is deliberately not called completion.
 
 ## Architecture
 
