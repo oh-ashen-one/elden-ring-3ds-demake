@@ -21,7 +21,7 @@ and the uncut physical-console proof. A missing report intentionally fails.
 - [x] Confirm the original CTR-001 model and record System Settings version `11.17.0-50J`.
 - [ ] Record Homebrew Launcher version; Luma3DS `v13.4` is installed.
 - [x] Back up important SD-card contents and the post-install SysNAND recovery image outside the repository.
-- [ ] Confirm Homebrew Launcher can run a known homebrew app; the SD card has passed FAT32 verification.
+- [x] Confirm Homebrew Launcher can launch Ashen Rift; the SD card passed FAT32 verification before the run.
 - [ ] Record the test build commit and SHA-256.
 
 Boot9strap, Luma3DS, and the standard finalization tools were installed using the current official [3DS Hacks Guide](https://3ds.hacks.guide/get-started.html) for this model and firmware. This setup milestone does not satisfy the game-specific physical acceptance gate below.
@@ -29,9 +29,19 @@ Boot9strap, Luma3DS, and the standard finalization tools were installed using th
 ## Deployment evidence
 
 - [ ] `make run IP=<3DS-IP>` transfers and starts the `.3dsx` through netloader.
-- [ ] The persistent SD bundle launches with the Mac disconnected.
+- [x] The persistent SD bundle launches with the Mac disconnected.
 - [ ] Select returns cleanly to Homebrew Launcher.
 - [ ] Sleep/wake resumes without corrupting rendering, input, or audio.
+
+## Current physical blocker
+
+The first CTR-001 run on 2026-07-20 launched from the persistent SD bundle and
+rendered both screens, but a large dark slab occluded most of the top-screen
+view in the Sunken Vestibule. The slab disappeared after entering the outdoor
+zone. Inspection confirmed that the interior camera was above the room's
+ceiling and looked through that geometry toward the player. The camera-height
+and room-boundary fix must pass a same-console retest before any playthrough is
+counted toward acceptance.
 
 ## Playthrough gate
 

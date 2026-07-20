@@ -1,5 +1,6 @@
 #include "demake/renderer.hpp"
 
+#include <algorithm>
 #include <cmath>
 #include <cstdio>
 #include <cstring>
@@ -38,6 +39,12 @@ constexpr std::uint8_t kCubeIndices[] = {
 };
 
 constexpr std::size_t kCubeIndexCount = sizeof(kCubeIndices) / sizeof(kCubeIndices[0]);
+
+constexpr float kCameraDistance = 7.2f;
+constexpr float kExteriorCameraHeight = 4.5f;
+constexpr float kInteriorCameraHeight = 3.45f;
+constexpr float kInteriorCameraWallLimit = 4.55f;
+constexpr float kInteriorCameraFrontLimit = 4.25f;
 
 bool loadTextAsset(const char* path, char* destination, std::size_t capacity) {
     if (!path || !destination || capacity < 2) {
@@ -160,9 +167,21 @@ void Renderer::updateCamera(const WorldState& world) {
     }
     const float forward_x = std::sin(camera_yaw_);
     const float forward_z = std::cos(camera_yaw_);
-    camera_ground_ = {player.position.x - forward_x * 7.2f,
-                      player.position.z - forward_z * 7.2f};
-    const C3D_FVec camera = FVec3_New(camera_ground_.x, 4.5f, camera_ground_.z);
+    camera_ground_ = {player.position.x - forward_x * kCameraDistance,
+                      player.position.z - forward_z * kCameraDistance};
+    float camera_height = kExteriorCameraHeight;
+    if (world.zone == Zone::Interior) {
+        // The vestibule roof starts at Y=3.95. Keeping the camera below it
+        // prevents the roof slab from sitting between the camera and player.
+        // Constraining the orbit to the room's inner side-wall and door faces
+        // also prevents rotated views from looking back through those solids.
+        camera_ground_.x = std::clamp(camera_ground_.x,
+                                      -kInteriorCameraWallLimit,
+                                      kInteriorCameraWallLimit);
+        camera_ground_.z = std::min(camera_ground_.z, kInteriorCameraFrontLimit);
+        camera_height = kInteriorCameraHeight;
+    }
+    const C3D_FVec camera = FVec3_New(camera_ground_.x, camera_height, camera_ground_.z);
     const C3D_FVec target = FVec3_New(player.position.x, 1.1f, player.position.z + 1.2f);
     const C3D_FVec up = FVec3_New(0.0f, 1.0f, 0.0f);
     Mtx_LookAt(&view_, camera, target, up, false);
