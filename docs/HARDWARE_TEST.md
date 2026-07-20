@@ -67,6 +67,7 @@ Required: a coherent 5–8 minute sequence, no crash, no audio underrun, no sust
 - [ ] Repeat both zone transitions at least five times across sessions.
 - [ ] Orbit the camera beside columns/trees in all three zones with no full-screen obstruction.
 - [ ] Verify the bottom-screen map, objective changes, facing pip, and ACT/HEAL/LOCK/DEBUG touch targets.
+- [ ] Confirm Ashen Deep Hall plays in the interior/vista and switches once to Ashen Gate at the arena without a crash, long gap, or underrun.
 
 ## Proof recording
 

@@ -22,6 +22,7 @@ def float_constant(source: str, name: str) -> float:
 def main() -> None:
     main_source = (ROOT / "source" / "main.cpp").read_text(encoding="utf-8")
     input_source = (ROOT / "source" / "game_app.cpp").read_text(encoding="utf-8")
+    audio_source = (ROOT / "source" / "audio_streamer.cpp").read_text(encoding="utf-8")
     renderer = (ROOT / "source" / "renderer.cpp").read_text(encoding="utf-8")
     controls = (ROOT / "docs" / "CONTROLS.md").read_text(encoding="utf-8")
     launcher = (ROOT / "GOAL_PROMPT.md").read_text(encoding="utf-8")
@@ -40,6 +41,10 @@ def main() -> None:
     require(input_source, "input.interact = true", "touch interact control")
     require(input_source, "input.heal = true", "touch heal control")
     require(input_source, "input.lock_toggle = true", "touch lock control")
+    require(input_source, "audio_.setZone(world.zone)", "zone-driven music switching")
+    require(audio_source, "romfs:/audio/ashen_deep_hall.pcm", "exploration music path")
+    require(audio_source, "romfs:/audio/ashen_gate.pcm", "boss music path")
+    require(audio_source, "zone == Zone::Arena", "boss-zone music selection")
     require(renderer, "BUILT FOR CTR-001", "title hardware label")
     require(renderer, "objectiveFor", "bottom-screen objective tracker")
     require(renderer, "mapPoint", "bottom-screen live map")
