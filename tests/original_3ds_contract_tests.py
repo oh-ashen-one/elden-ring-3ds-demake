@@ -35,14 +35,22 @@ def main() -> None:
     require(input_source, "KEY_DUP", "next-item control")
     require(input_source, "KEY_DDOWN", "previous-item control")
     require(input_source, "KEY_Y", "heavy-attack control")
-    require(input_source, "KEY_TOUCH", "touch diagnostics control")
+    require(input_source, "KEY_TOUCH", "touch gameplay controls")
     require(input_source, "hidTouchRead", "touchscreen sampling")
+    require(input_source, "input.interact = true", "touch interact control")
+    require(input_source, "input.heal = true", "touch heal control")
+    require(input_source, "input.lock_toggle = true", "touch lock control")
     require(renderer, "BUILT FOR CTR-001", "title hardware label")
-    require(renderer, "D-left/right camera", "bottom-screen controls")
+    require(renderer, "objectiveFor", "bottom-screen objective tracker")
+    require(renderer, "mapPoint", "bottom-screen live map")
+    require(renderer, 'drawTouchButton("ACT"', "bottom-screen action button")
+    require(renderer, "distanceToSegment", "cross-zone camera occluder filter")
+    require(renderer, "occluder_radius", "generated-prop camera clearance")
     require(renderer, "std::clamp(camera_ground_.x", "interior camera wall constraint")
     require(renderer, "std::min(camera_ground_.z", "interior camera door constraint")
     require(controls, "D-pad Left / Right", "documented camera controls")
     require(controls, "| Y | Heavy attack |", "documented heavy attack")
+    require(controls, "Touch ACT", "documented touchscreen gameplay")
 
     interior_boxes = {box["name"]: box for box in scene["zones"]["interior"]["boxes"]}
     ceiling = interior_boxes["ceiling"]
@@ -60,6 +68,19 @@ def main() -> None:
         "interior camera orbit must stay inside the wall face"
     )
     assert front_limit <= 4.3, "interior camera must stay behind the closed door face"
+    ceiling_zones = [
+        zone_name
+        for zone_name, zone in scene["zones"].items()
+        for box in zone["boxes"]
+        if "ceiling" in box["name"]
+    ]
+    assert ceiling_zones == ["interior"], "only the constrained interior may contain a ceiling"
+    assert all(
+        not template.get("always", False)
+        for zone in scene["zones"].values()
+        for generator in zone.get("generators", [])
+        for template in generator.get("templates", [generator.get("template", {})])
+    ), "generated columns and trees must remain eligible for sightline culling"
     assert len(launcher) < 4000, f"GOAL_PROMPT.md is {len(launcher)} characters"
 
     print("original 3DS contract tests passed")
