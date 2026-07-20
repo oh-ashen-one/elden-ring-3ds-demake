@@ -39,9 +39,11 @@ The first CTR-001 run on 2026-07-20 launched from the persistent SD bundle and
 rendered both screens, but a large dark slab occluded most of the top-screen
 view in the Sunken Vestibule. The slab disappeared after entering the outdoor
 zone. Inspection confirmed that the interior camera was above the room's
-ceiling and looked through that geometry toward the player. The camera-height
-and room-boundary fix must pass a same-console retest before any playthrough is
-counted toward acceptance.
+ceiling and looked through that geometry toward the player. The pending build
+keeps that camera inside the room and hides generated columns or trees only
+while they cross the camera-to-player sightline. A same-console retest must
+rotate the camera through a full orbit beside vestibule columns, vista trees,
+and arena columns before any playthrough is counted toward acceptance.
 
 ## Playthrough gate
 
@@ -63,6 +65,8 @@ Required: a coherent 5–8 minute sequence, no crash, no audio underrun, no sust
 - [ ] Die during each boss attack class and restart.
 - [ ] Win and restart.
 - [ ] Repeat both zone transitions at least five times across sessions.
+- [ ] Orbit the camera beside columns/trees in all three zones with no full-screen obstruction.
+- [ ] Verify the bottom-screen map, objective changes, facing pip, and ACT/HEAL/LOCK/DEBUG touch targets.
 
 ## Proof recording
 

@@ -23,7 +23,8 @@ Status meanings:
 | Requirement | Status | Authoritative evidence |
 | --- | --- | --- |
 | Title, enclosed opening, animated door reveal, outdoor vista, NPC, fog transition, boss, death/victory, restart | Local pass for state flow | `GameSession`, `ZoneManager`, `Renderer`, and deterministic host smoke flows |
-| CTR-001 controls: Circle Pad, D-pad camera/items, L/R/Y/B/A/X/Start/Select and touch diagnostics | Implemented, hardware pending | `GameApp::readInput`, `CONTROLS.md`, source-contract tests; ergonomics require the console |
+| CTR-001 controls: Circle Pad, D-pad camera/items, L/R/Y/B/A/X/Start/Select and touch ACT/HEAL/LOCK/DEBUG | Implemented, hardware pending | `GameApp::readInput`, `CONTROLS.md`, source-contract tests; ergonomics require the console |
+| Useful lower screen: live objective, zone map, facing/objective markers, status, and touch actions | Implemented, hardware pending | `Renderer::renderUi`, `CONTROLS.md`, source-contract tests; legibility and touch ergonomics require the console |
 | Player combat states, health, stamina, flasks, invulnerability, lock-on, hit reactions | Local pass | `PlayerController`, rigid-pose sampler, combat and edge-case host tests |
 | Boss with multiple telegraphed attacks, hitboxes, health/name UI, victory/reset | Local pass for logic | `BossController`, arena renderer, deterministic slash/slam/death/victory/reset tests |
 | Original text-only NPC presentation | Local pass | UTF-8 `romfs/dialogue/keeper.txt` is validated and loaded into a fixed renderer buffer from RomFS |
