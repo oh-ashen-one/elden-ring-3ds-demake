@@ -8,7 +8,7 @@ Use the official devkitPro setup and install the `3ds-dev` package group. The pr
 - `DEVKITARM=/opt/devkitpro/devkitARM`
 - `libctru`, `citro3d`, `citro2d`, `picasso`, `3dstools`, `tex3ds`, and `3dslink`
 
-CI pins the official `devkitpro/devkitarm` image by OCI digest and records the compiler and `tex3ds` versions in its private artifact report. Updating that digest is an intentional toolchain change and requires a clean local/CI gate.
+CI pins the official `devkitpro/devkitarm` image by OCI digest and records the compiler and `tex3ds` versions in its artifact report. Updating that digest is an intentional toolchain change and requires a clean local/CI gate.
 
 If the official 3DS libraries and host tools were installed in a user-writable prefix instead of the system devkitPro prefix, set `ASHEN_3DS_ROOT` to that prefix, or set `CTRULIB` and `ASHEN_3DS_TOOLS` separately. The local bootstrap used for this project is detected automatically at `~/.local/share/elden-ring-3ds-devkit`.
 

@@ -12,10 +12,10 @@ Status meanings:
 
 | Requirement | Status | Authoritative evidence |
 | --- | --- | --- |
-| Private `oh-ashen-one/elden-ring-3ds-demake` repository and `origin` | Local pass | Live GitHub repository metadata plus `git remote -v`; private CI/PRs are recorded in `BUILD_EVIDENCE.md` |
-| No extracted commercial assets, credentials, console-unique files, SD backups, release package, or public license | Local pass | `make audit-repo`; `assets/manifest.json`; `ASSET_PROVENANCE.md`; no license file |
+| Public `oh-ashen-one/elden-ring-3ds-demake` repository and `origin` | Local pass | Live GitHub repository metadata plus `git remote -v`; CI/PRs are recorded in `BUILD_EVIDENCE.md` |
+| No extracted commercial assets, credentials, personal paths, console-unique files, SD backups, or committed release package | Local pass | `make audit-repo`; `assets/manifest.json`; `ASSET_PROVENANCE.md`; MIT `LICENSE` |
 | Official devkitPro native C++17 build | Local pass | `Makefile`, devkitARM flags, libctru/citro3d/citro2d/tex3ds use, clean `make verify-build` |
-| Private CI builds/tests/verifies and retains artifacts | Local pass | `.github/workflows/build.yml`; green GitHub Actions runs and downloaded private artifacts in `BUILD_EVIDENCE.md` |
+| CI builds/tests/verifies and retains artifacts | Local pass | `.github/workflows/build.yml`; green GitHub Actions runs and downloaded artifacts in `BUILD_EVIDENCE.md` |
 | Netload and persistent SD workflows exist | Implemented, hardware pending | `make check-netload IP=...` validates address/artifact/tool discovery; `make run IP=...`; deterministic `make package-sd`; SD-root path and embedded source/hash validation |
 
 ## Playable vertical slice
